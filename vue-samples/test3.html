@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../node_modules/vue/dist/vue.min.js"></script>
+  <style>
+    .child-a {
+      padding: 10px;
+      display: block;
+      background-color: #979eff;
+    }
+    #app {
+      padding: 10px;
+      display: block;
+      background-color: #ffaa9f;
+    }
+
+    .child-b {
+      padding: 10px;
+      display: block;
+      background-color: #acffb2;
+    }
+    input {
+      display: block;
+      margin: 5px;
+    }
+    th {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <child-a v-model="value"></child-a>
+  <child-b v-model="value"/></child-b>
+  <input type="button" @click="clear" value="Clear"/>
+</div>
+
+<template id="child-a">
+  <div class="child-a">
+    <input type="text" v-model="value.address1">
+    <input type="text" v-model="value.address2">
+    <input type="button" @click="apply" value="change">
+  </div>
+</template>
+
+<template id="child-b">
+  <div class="child-b">
+    <table>
+      <tr><th>address1:</th><td> {{ value.address1 }}</td></tr>
+      <tr><th>address2: </th><td> {{ value.address2 }}</td></tr>
+    </table>
+  </div>
+</template>
+
+
+  <script>
+  Vue.component('child-a', {
+    template: '#child-a',
+    //The child has a prop named 'value'. v-model will automatically bind to this prop
+    props: ['value'],
+    methods: {
+      apply: function() {
+        console.log("Emitting", this.value);
+        this.$emit('input', Object.assign({}, this.value));
+      }
+    }
+  });
+
+  Vue.component('child-b', {
+    template: '#child-b',
+    //The child has a prop named 'value'. v-model will automatically bind to this prop
+    props: ['value']
+  });
+
+  new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        value: {
+          address1: 'address',
+          // TODO I receive this dict from rest and then I set it in method. So I maybe missing some fields
+          //e.g. address2 that breaks functionality
+//          address2: 'address2'
+        },
+        state: 'a'
+      }
+    },
+    methods: {
+      clear: function() {
+        this.value = Object.assign({}, this.value, {});
+      },
+    }
+  });
+</script>
+</body>
+</html>

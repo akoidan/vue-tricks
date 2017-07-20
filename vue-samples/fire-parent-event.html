@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script src="../node_modules/vue/dist/vue.min.js"></script>
+
+</head>
+<body>
+<div id="app">
+  <p>Parent value: {{value}}</p>
+  <child :my-value="value" asdf changeParent="changeParent"></child>
+</div>
+
+<template id="child">
+  <div>
+  <input type="button" v-on:click="this.changeValue" value="change">
+  <input type="text" v-model="myValue">
+  </div>
+</template>
+
+<script>
+  Vue.component('child', {
+    template: '#child',
+
+    //The child has a prop named 'value'. v-model will automatically bind to this prop
+    props: {
+      myValue: {
+        type: String,
+        required: true
+      },
+    },
+    data: function () {
+      return {
+        internalValue: ''
+      }
+    },
+    watch: {
+      'internalValue': function () {
+        // When the internal value changes, we $emit an event. Because this event is
+        // named 'input', v-model will automatically update the parent value
+        this.$emit('input', this.internalValue);
+      }
+    },
+    created: function () {
+      // We initially sync the internalValue with the value passed in by the parent
+      this.internalValue = this.value;
+    },
+    methods: {
+      changeValue: function() {
+        console.log('change');
+        this.$parent.changeParent();
+      }
+    }
+  });
+
+  new Vue({
+    el: '#app',
+    data: {
+      value: 'hello'
+    },
+    methods: {
+      changeParent: function() {
+        console.log('parent works');
+      }
+    }
+  });
+</script>
+</body>
+</html>

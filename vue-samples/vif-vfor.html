@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <style>
+    .red {
+      color: red;
+    }
+    .green {
+      color: green;
+    }
+    .yellow {
+      color: #806200;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <child v-if="dspl"></child>
+  <input type="button" @click.once="revert" value="show"/>
+  <table>
+    <tr is="child2"></tr>
+  </table>
+</div>
+
+<template id="child2">
+  <tr>
+    <td>asd</td>
+  </tr>
+</template>
+
+<template id="child">
+  <ul id="example-1">
+    <template v-for="item in items">
+      <li >{{ item }}</li>
+      <li></li>
+    </template>
+  </ul>
+</template>
+<script>
+
+
+  Vue.component('child2', {
+    template: '#child2',
+  })
+
+
+  Vue.component('child', {
+    template: '#child',
+    data: function () {
+      return {
+        items: [1,2,3,4,5]
+      }
+    }
+  });
+  new Vue({
+    el: '#app',
+    data: {
+      dspl: true,
+    },
+    methods: {
+      revert: function(){
+        this.dspl = !this.dspl;
+      }
+    }
+  });
+</script>
+</body>
+</html>

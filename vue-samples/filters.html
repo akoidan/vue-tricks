@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script src="../node_modules/vue/dist/vue.min.js"></script>
+
+</head>
+<body>
+<div id="app">
+  <p>{{ password | mutate}}</p>
+</div>
+
+<script>
+
+  new Vue({
+    el: '#app',
+    data: {
+      password: 'asdfas',
+      anotherField: 'asdf',
+    },
+    filters: {
+      mutate: function (p) {
+        return this.anotherField +'   ' + p;
+      }
+    }
+  });
+</script>
+</body>
+</html>

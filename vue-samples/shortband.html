@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script src="../node_modules/vue/dist/vue.min.js"></script>
+  <style>
+    .red {
+      color: red;
+    }
+    .green {
+      color: green;
+    }
+    .yellow {
+      color: #806200;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <p>Password strength validator</p>
+  <input type="text" :class="classObj" v-model="password"/>
+  <input type="button" @click="click" value="Check"/>
+</div>
+
+<script>
+
+  new Vue({
+    el: '#app',
+    data: {
+      password: '',
+    },
+    methods: {
+      click: function() {
+        alert(`Password is ${this.passwordType}`);
+      }
+    },
+    computed: {
+      classObj: function() {
+        return  {
+          'green': this.password.length > 9,
+          'red': this.password.length < 5,
+          'yellow': this.password.length < 10 && this.password.length > 4,
+        };
+      },
+      passwordType: function() {
+        if (this.password.length > 9) {
+          return 'good'
+        } else if (this.password.length > 4) {
+          return 'weak';
+        } else {
+          return 'bad';
+        }
+      },
+    }
+  });
+</script>
+</body>
+</html>
