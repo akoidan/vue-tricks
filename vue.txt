@@ -1,0 +1,17 @@
+Extend contructor https://vuejs.org/v2/guide/instance.html#Constructor
+watch attribute change (getter + setter): https://vuejs.org/v2/guide/instance.html#Properties-and-Methods
+LifeCycle https://vuejs.org/v2/guide/instance.html#Instance-Lifecycle-Hooks
+You can create own render functions: https://vuejs.org/v2/guide/render-function.html
+You can use expression inside Mustache syntax {{ a + 'sd' }} but not {{ if (a) return 3 }}
+attribute syntax is v-my_name:argument.modifier="value" eg <form v-on:submit.prevent="onSubmit"></form>
+filters: {{ message | filterA | filterB('arg2', arg3 }}
+define custom keycode modifier @keypress.asd , Vue.config.keyCodes = { asd: 86, }   https://vuejs.org/v2/api/#keyCodes
+$event <button v-on:click="warn('asd.', $event)"> Submit </button>
+caveats: this.asdf[3]= asd => Vue.set(this.asd, 3, asd)
+multiple values in if <template v-if=asdf> <v1> </v2> </template>
+mutliple checkboxes tied to single array <input type="checkbox" value="Jack" v-model="checkedNames"> <input type="checkbox" value="John" v-model="checkedNames">
+v-model can be also used on components , component should 1) have 'value' prop, 2) $emit('input', value) https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
+slots allow to inject template into child
+dynamic component - allows  you to specify component name via variable e.g.   <component :is="variableName"/> variableName holds tagName (componentName)
+load component from server in runtime : export default () => import('./mycomponent.vue')); ==== func instead of dict
+
