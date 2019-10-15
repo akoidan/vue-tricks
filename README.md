@@ -11,3 +11,13 @@ Advantages over reactjs:
  - react doesn't have single file components, and even is some not known libs support it, your favorite IDE will go crazy about it. So what, who needs SFC? Tell me that when you start importing css files to jsx and end up with coupled together css/js across different component in huge enterpice reactproject
  - no `v-model` attribute, what do you need to update prop on parent, Yeah correct go proxy 
  - Redux complexity, no comments... Yeah you can go with different libs like graphql/mobx, is that what happens when you come to the project that has rect?. Oh yeah add saga to separate the code it becomes more intuitive (*joke)
+ - vuex-module-decorators, vue-property-decorator, simplifies the code even more, than declaring state in react with static init, or having it in constructor
+ - Scoped css, any alternative in react, go watch for duplicates in your css imports across all files
+ - Template tag, v-for, v-show, v-show, v-if- v-else-if (hello do expression tc39 stage 1) having html exatly as it is, don't need to change classNames and etc, computed props (yeah go declare it twice from state), watch property
+ - Pipes v-on:submit.prevent=, creating own attributes, custom pipes.
+ - Different types of class declaration out of the box, string, array, object.
+ - v-show on components are lazy out of the box, try hard that with virtual dom, yeah the truth hurts.
+ - Mutliples slots ( react children only has one)
+ - vue 3 supports ts out of the box, 
+ - css transitions out of the box (automatic class triggering and detecting appropriate timings)
+ 
