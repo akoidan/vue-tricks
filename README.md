@@ -21,3 +21,36 @@ Advantages over reactjs:
  - vue 3 supports ts out of the box, 
  - css transitions out of the box (automatic class triggering and detecting appropriate timings)
  
+ 
+ ### Hello redux, that's 1 step in vuex:
+ moving from setState to redux steps:
+ 
+ 1) jsx : add this.props.exportSurveyModalShown
+ 2) mapStateToProps mapStateToProps exportSurveyModalShown
+ 3)actions: const EXPORT_SURVEY_MODAL_VISIBILITY
+ 4) actions:  export function exportSurveyModalVisibility(data) {
+  return {
+    type: EXPORT_MODAL_VISIBILITY,
+    data,
+  };
+}
+5) actions: export function exportSurveyModal() {
+  return (dispatch) => {
+    dispatch(exportModalVisibility(true));
+  }
+}
+6) import {exportGradebook, exportSurveyModal} from "../actions";
+7) connect(mapStateToProps, {exportSurveyModal})(ExportButton);
+8) this.props.exportSurveyModal()
+9) reducers: 
+const exportSurveyModalShown = (state=false, action) => {
+  switch (action.type) {
+  case EXPORT_MODAL_VISIBILITY:
+    return action.data;
+  default:
+    return state;
+  }
+};
+
+10) reducers const uiState = combineReducers({setupWizardShown, exportModalShown, switchDashboardEnabled, exportSurveyModalShown});
+11) combineReducers ({..., uiState})
